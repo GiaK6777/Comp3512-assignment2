@@ -1,0 +1,145 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+header, footer {
+    padding: 1rem;
+    background-color: #eee;
+}
+
+nav a {
+    margin-right: 1rem;
+}
+
+main {
+    padding: 1rem;
+}
+
+/* View nào đang không dùng thì sau này sẽ ẩn bằng JS.
+   Lúc này bạn cứ để tất cả đều hiện để kiểm tra layout. */
+.view {
+    margin-bottom: 2rem;
+    border: 1px solid #ddd;
+    padding: 1rem;
+}
+/* ==== Browse products grid ==== */
+
+#resultsPanel {
+    margin-top: 1rem;
+}
+
+/* container dạng lưới */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+/* mỗi card sản phẩm */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+/* ô màu theo hex */
+.product-swatch {
+    width: 100%;
+    height: 120px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+    background-color: #e0e0e0; /* fallback */
+}
+
+/* text trong card */
+.product-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.product-price {
+    margin: 0;
+    font-weight: 600;
+}
+
+.product-meta {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.product-extra {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* nút xem chi tiết */
+.product-view-btn {
+    margin-top: 0.4rem;
+    align-self: flex-start;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: white;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.product-view-btn:hover {
+    background-color: #333;
+    color: white;
+}
+.remove-item-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.remove-item-btn:hover {
+    background-color: #cc0000;
+}
+/* Toaster styling */
+.toaster {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: slideIn 0.5s ease-out;
+}
+
+.toaster.success {
+    background-color: #4CAF50; /* Màu xanh lá cho thành công */
+}
+
+.toaster.error {
+    background-color: #f44336; /* Màu đỏ cho lỗi */
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
