@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
        1. VIEW MANAGEMENT
     ======================== */
 
-    // Select all views (<article class="view">)
+    // Select all views 
     const views = document.querySelectorAll(".view");
 
     // All nav links that switch views
