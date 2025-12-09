@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minimal Clothing Co. SPA</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+
+     <!-- Logo acts as a button that returns to the Home view -->
+    <h1 id="siteLogo">
+      <a href="#" id="logoLink" data-view="home">Minimal Clothing Co.</a>
+    </h1>
+
+     <!-- Navigation links: each link changes the active SPA view -->
+    <nav>
+      <a href="#" data-view="home">Home</a>
+      <a href="#" data-view="browse">Browse</a>
+      <!-- Opens the About dialog modal -->
+      <a href="#" id="aboutLink">About</a>
+       <!-- Cart link with dynamic item count -->
+      <a href="#" data-view="cart">Cart <span id="cartCount">(0)</span></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+    <!-- HOME VIEW -->    
+    <article id="home" class="view">
+
+
+        <!-- Hero section: main headline + CTA -->
+        <section class="home-hero">
+            <div class="hero-text">
+                <h2>Elevate Your Everyday Style</h2>
+                <p>Discover timeless pieces designed for comfort and confidence.</p>
+
+                 <!-- Button navigates user to Browse view -->
+                <button id="shopNowBtn" class="primary-btn">Shop Now</button>
+            </div>
+
+             <!-- Placeholder area for an optional hero image -->
+            <div class="hero-image-main" aria-hidden="true"></div>
+        </section>
+
+         <!-- Featured product categories for quick browsing -->
+        <section class="home-featured">
+            <h3>Featured Products</h3>
+            <p>Hand-picked favorites to get you started.</p>
+
+             <!-- Three clickable feature cards -->
+            <div class="home-feature-grid">
+                <div class="home-feature-card home-feature-link">
+                    <h4>Everyday Essentials</h4>
+                    <p>Simple, versatile pieces for daily wear.</p>
+                </div>
+                <div class="home-feature-card home-feature-link">
+                    <h4>Workwear Staples</h4>
+                    <p>Clean silhouettes that dress up or down.</p>
+                </div>
+                <div class="home-feature-card home-feature-link">
+                    <h4>Weekend Comfort</h4>
+                    <p>Soft fabrics made for slow days off.</p>
+                </div>
+            </div>
+        </section>
+    </article>
+
+
+   
+
+    <!-- Browse view -->
+    <article id="browse" class="view">
+        <div class="browse-layout">
+            <!-- FILTER PANEL: gender, category, size, color -->
+            <aside id="filterPanel">
+                <h3>Departments</h3>
+
+                <!-- Each select triggers SPA filtering -->
+                <div class="filter-group">
+                    <label for="genderFilter">Gender</label>
+                    <select id="genderFilter">
+                        <option value="all">All</option>
+                        <option value="mens">Male</option>
+                        <option value="womens">Female</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="categoryFilter">Category</label>
+                    <select id="categoryFilter">
+                        <option value="all">All</option>
+                        <option value="Tops">Tops</option>
+                        <option value="Bottoms">Bottoms</option>
+                        <option value="Dresses">Dresses</option>
+                        <option value="Outerwear">Outerwear</option>
+                        <option value="Sweaters">Sweaters</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sizeFilter">Size</label>
+                    <select id="sizeFilter">
+                        <option value="all">All Sizes</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="colorFilter">Color</label>
+                    <select id="colorFilter">
+                        <option value="all">All Colors</option>
+                        <option value="Black">Black</option>
+                        <option value="White">White</option>
+                        <option value="Navy">Navy</option>
+                        <option value="Beige">Beige</option>
+                        <option value="Gray">Gray</option>
+                    </select>
+                </div>
+            </aside>
+
+             <!-- MAIN BROWSE AREA: results + sorting -->
+            <section id="browseMain">
+                <h2>Browse</h2>
+
+                     <!-- Top bar: results label + clear filters + sort -->
+                <div id="browseTopBar">
+                    <div class="results-area">
+                        <span class="results-label">Results</span>
+                        <button id="clearAllFilters" type="button">X Clear All</button>
+                    </div>
+
+                    <div class="sort-area">
+                        <span class="sort-label">Sort</span>
+                        <select id="sortOrder">
+                            <option value="name">Product Name (A-Z)</option>
+                            <option value="price">Price (Low to High)</option>
+                            <option value="category">Category</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Displays the current active filters -->
+                <div id="currentFiltersBar">
+                    <span id="currentFiltersText">All products</span>
+                </div>
+                
+                <!-- Product grid is dynamically generated by JavaScript -->
+
+                <section id="productsGrid" class="product-grid"></section>
+            </section>
+        </div>
+    </article>
+
+    <!-- SINGLE PRODUCT VIEW -->
+    <article id="singleproduct" class="view">
+        <h2>Product Details</h2>
+
+        <!-- breadcrumb -->
+        <nav id="breadcrumb" aria-label="Breadcrumb"></nav>
+
+        <!-- main layout: image + info -->
+        <section id="productMain" class="product-layout">
+            <div id="productImage">
+                <p>Product image placeholder</p>
+            </div>
+
+            <div id="productInfo">
+                 <!-- Populated with product-specific data -->
+                <h3 id="productName">Product Name</h3>
+                <p id="productPrice">$0.00</p>
+                <p id="productDescription">Product description...</p>
+                <p id="productMaterial">Material: ...</p>
+
+                <div class="product-controls">
+
+                    <!-- size pills -->
+                  <p class="sub-label">Sizes:</p>
+                  <div id="sizePills" class="pill-row"></div>
+
+                   <!-- color pills -->
+               <p class="sub-label">Colors:</p>
+             <div id="colorPills" class="pill-row"></div>
+
+
+
+                    <div class="control-row">
+                         <!-- Quantity selector -->
+                        <label for="qtyInput">Quantity:</label>
+                        <input id="qtyInput" type="number" min="1" value="1">
+                    </div>
+
+                    <!-- Add item to cart -->
+                    <button id="addToCartBtn" type="button">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- related products -->
+        <section id="relatedProducts">
+            <h3>Related Products</h3>
+            <div id="relatedProductsPanel" class="product-grid"></div>
+        </section>
+    </article>
+
+    <!-- CART VIEW -->
+    <article id="cart" class="view">
+        <h2>Shopping Cart</h2>
+        <!-- Table of items in the cart -->
+        <section id="cartPanel"></section>
+
+        <!-- Summary box for merchandise, shipping, tax, totals -->
+        <section id="cartSummary">
+            <h3>Summary</h3>
+            <label for="destination">Destination:</label>
+            <select id="destination">
+                <option value="CA">Canada</option>
+                <option value="US">USA</option>
+                <option value="INT">International</option>
+            </select>
+
+            <label for="shippingType">Shipping:</label>
+            <select id="shippingType">
+                <option value="standard">Standard</option>
+                <option value="express">Express</option>
+                <option value="priority">Priority</option>
+            </select>
+
+            <div class="summary-details">
+                <p>Merchandise: $<span id="summaryMerch">0.00</span></p>
+                <p>Shipping: $<span id="summaryShipping">0.00</span></p>
+                <p>Tax: $<span id="summaryTax">0.00</span></p>
+                <p><strong>Total: $<span id="summaryTotal">0.00</span></strong></p>
+            </div>
+
+            <button id="clearCartBtn" type="button">Clear Cart</button>
+            <button id="checkoutBtn" type="button">Checkout</button>
+        </section>
+    </article>
+
+        <!-- ABOUT OVERLAY (dialog) -->
+    <dialog id="aboutDialog" class="about-dialog">
+        <div class="about-content">
+           <button id="closeAboutBtn" class="about-close" type="button">×</button>
+
+            <h2>About Minimal Clothing Co.</h2>
+            <p>
+             Minimal Clothing Co. is a lightweight single–page shopping application built for 
+             <strong>COMP 3512 – Web II</strong>. The project demonstrates how modern front-end techniques
+              can be combined to produce smooth navigation, dynamic interfaces, and a clean user experience.
+            </p>
+
+            <p>
+                All data is loaded from a JSON file and rendered with
+                JavaScript and DOM APIs.
+            </p>
+
+
+              <p>
+              Key features include:
+              </p>
+             <ul>
+             <li>SPA-style navigation using JavaScript view management</li>
+             <li>Filter & sort system (gender, category, size, color, price)</li>
+             <li>Dynamic product cards and single-product view</li>
+              <li>Client-side cart with quantity editing, shipping options, and totals</li>
+              <li>Use of the HTML <code>&lt;dialog&gt;</code> element for modal UI</li>
+             </ul>
+        </div>
+    </dialog>
+
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <p>&copy; 2025 Minimal Clothing Co. &middot;
+             Assignment2_COMP 3512.</p>
+        <p>
+            Code source:
+            <a href="https://github.com/GiaK6777/Comp3512-assignment2.git" target="_blank" rel="noopener">
+                GitHub
+            </a>.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
+

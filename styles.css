@@ -1,0 +1,546 @@
+/* =========================================================
+   1. RESET + GLOBAL VARIABLES
+========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+:root {
+    /* Global font */
+    --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    /* Main color palette */
+    --color-text: #222;
+    --color-muted: #666;
+    --color-light: #f7f7f7;
+    --color-border: #e5e5e5;
+    --color-dark: #111;
+    --color-accent: #007bff;
+
+    /* Spacing scale */
+    --space-xs: 6px;
+    --space-sm: 12px;
+    --space-md: 20px;
+    --space-lg: 32px;
+
+    /* Border radius scale */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+
+    /* Shadows for depth effects */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: #fafafa;
+    color: var(--color-text);
+    line-height: 1.6; /* Improved readability */
+}
+
+main {
+    max-width: 1200px; /* Center content */
+    margin: var(--space-lg) auto;
+    padding: 0 var(--space-md);
+}
+
+/* Hide all views by default — JS will show the active one */
+.view {
+    display: none;
+    background: white;
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* =========================================================
+   2. HEADER — navigation bar and branding
+========================================================= */
+header {
+    background: #fff;
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-sm) 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 0 var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#siteLogo a {
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--color-dark);
+}
+
+nav a {
+    margin-left: var(--space-md);
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-muted);
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: var(--color-dark);
+}
+
+/* Style for cart item count badge */
+#cartCount {
+    background: var(--color-dark);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 50%;
+    font-size: 0.8rem;
+}
+
+/* =========================================================
+   3. HOME PAGE (Hero + Featured Sections)
+========================================================= */
+
+/* Top hero layout: image + text */
+.home-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(120deg, #f2f2f2, #fafafa);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-lg);
+}
+
+.hero-text {
+    max-width: 50%;
+}
+
+.hero-text h2 {
+    font-size: 2.3rem;
+    margin-bottom: var(--space-sm);
+}
+
+.hero-text p {
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+}
+
+/* Main call-to-action button */
+.primary-btn {
+    background: var(--color-dark);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    background: #333;
+}
+
+/* Placeholder block for hero image */
+.hero-image-main {
+    width: 380px;
+    height: 240px;
+    background: #d8d8d8;
+    border-radius: var(--radius-md);
+}
+
+/* Featured row section */
+.home-featured {
+    text-align: center;
+    margin-top: var(--space-lg);
+}
+
+.home-featured h3 {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.home-featured p {
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+}
+
+/* 3 clickable feature cards */
+.home-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+}
+
+.home-feature-card {
+    background: #f1f1f1;
+    padding: var(--space-lg) var(--space-sm);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.home-feature-card:hover {
+    transform: translateY(-4px);
+    background: #e6e6e6;
+}
+
+/* =========================================================
+   4. BROWSE VIEW — Filters on left, products on right
+========================================================= */
+.browse-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--space-lg);
+}
+
+/* ---------- FILTER PANEL (left side) ---------- */
+#filterPanel {
+    background: var(--color-light);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    height: fit-content;
+}
+
+#filterPanel h3 {
+    margin-bottom: var(--space-sm);
+}
+
+.filter-group {
+    margin-bottom: var(--space-sm);
+}
+
+#filterPanel label {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    display: block;
+}
+
+#filterPanel select {
+    width: 100%;
+    padding: 6px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #bbb;
+}
+
+/* ---------- BROWSE MAIN (right side) ---------- */
+#browseMain h2 {
+    margin-bottom: var(--space-sm);
+}
+
+/* Results + Sort Controls */
+#browseTopBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+#clearAllFilters {
+    background: #f1f1f1;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#clearAllFilters:hover {
+    background: #ddd;
+}
+
+/* Product grid layout */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-md);
+}
+
+/* =========================================================
+   5. PRODUCT CARDS — shown in Browse + Related Products
+========================================================= */
+.product-card {
+    background: white;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    transition: 0.25s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Color swatch at top of product card */
+.product-swatch {
+    width: 100%;
+    height: 130px;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-sm);
+    border: 1px solid #ddd;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: var(--space-sm);
+}
+/* 
+   RELATED PRODUCT CARDS 
+*/
+
+.related-card {
+    background: white;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.related-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+/* related swatch (thumbnail) */
+.related-swatch {
+    width: 100%;
+    height: 120px;
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-sm);
+    border: 1px solid #ddd;
+}
+
+/* keep button row same style */
+.related-card .card-actions {
+    margin-top: var(--space-sm);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* =========================================================
+   6. SINGLE PRODUCT VIEW — main image + details + pills
+========================================================= */
+.product-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-lg);
+}
+
+/* Product image container */
+#productImage {
+    background: #f5f5f5;
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+}
+
+.product-main-swatch {
+    width: 100%;
+    height: 230px;
+    border-radius: var(--radius-md);
+    border: 1px solid #ccc;
+}
+
+/* Selection pills (size + color) */
+.option-pill {
+    padding: 5px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #bbb;
+    background: white;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+.option-pill.selected {
+    background: var(--color-dark);
+    color: white;
+    border-color: var(--color-dark);
+}
+
+/* Color pill as small square */
+.color-pill {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-sm);
+    border: 1px solid #bbb;
+    padding: 0;
+}
+
+/* =========================================================
+   7. CART VIEW — table + summary box
+========================================================= */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--space-md);
+}
+
+.cart-table th {
+    text-align: left;
+    padding: var(--space-sm);
+    border-bottom: 2px solid var(--color-dark);
+}
+
+.cart-table td {
+    padding: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+}
+
+#cartSummary {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    width: 350px;
+}
+
+#checkoutBtn,
+#clearCartBtn {
+    width: 48%;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    margin-top: var(--space-sm);
+    font-weight: 600;
+}
+
+#checkoutBtn {
+    background: #28a745;
+    color: white;
+}
+
+#clearCartBtn {
+    background: #ff4d4d;
+    color: white;
+}
+
+/* =========================================================
+   8. TOASTER — popup notification
+========================================================= */
+.toaster {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--color-dark);
+    padding: 15px 25px;
+    border-radius: var(--radius-md);
+    color: white;
+    box-shadow: var(--shadow-md);
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(50px); opacity: 0; }
+    to   { transform: translateX(0); opacity: 1; }
+}
+
+/* =========================================================
+   9. RESPONSIVE DESIGN — stack layout for small screens
+========================================================= */
+@media (max-width: 900px) {
+    .home-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text {
+        max-width: 100%;
+    }
+    .hero-image-main {
+        margin-top: var(--space-md);
+    }
+
+    .browse-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .product-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   ABOUT DIALOG 
+========================================================= */
+.about-dialog {
+    border: none;
+    border-radius: 12px;
+    padding: 2rem 2.2rem;
+    max-width: 520px;
+    width: 90%;
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.20);
+    animation: fadeIn 0.25s ease-out;
+}
+
+/* Background blur behind dialog */
+.about-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(1px);
+}
+
+/* Dialog contents */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #222;
+}
+
+.about-dialog h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.about-dialog p {
+    color: #555;
+}
+
+/* Close “X” button */
+.about-close {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #444;
+    padding: 0;
+    transition: 0.2s ease;
+}
+
+.about-close:hover {
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* Subtle fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
